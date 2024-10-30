@@ -19,8 +19,17 @@ Presently,only in debug version can you modify your parameter
 `pf`:choose the MOP
 ### 2.Run
 Recommand run in IDE.
+Build proj:
 In terminal of the root dir,input
 ```
 cargo build
 ```
-will generate the result
+Run:
+```
+cargo run
+```
+will generate the result. 
+##Note
+1. if the pop size is enormous,build your release version to run
+2. In Mei model of OneMinMax problem, the extreme points will be found aound 3000+-500 generation. Occassionally,4000 gen
+   
