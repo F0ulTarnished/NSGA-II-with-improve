@@ -92,6 +92,33 @@ impl Species {
         max_difference
         
     }
+    pub fn add_margin_indiv(&mut self){
+        let mut rng=rand::thread_rng();
+        let pop=self.population.deref_mut();
+
+        let mut k=0;
+        while k<20{
+            let mut margin_indiv:Vec<f64>=Vec::new();
+            let mut margin_indiv2:Vec<f64>=Vec::new();
+            for i in 0..self.var_num{ 
+                let r=rng.gen_range(0.0..1.0);
+                if r<0.99{
+                    margin_indiv.push(self.var_limit[i].0);
+                    margin_indiv2.push(self.var_limit[i].1);
+                }
+                else {
+                    margin_indiv.push(self.var_limit[i].1);
+                    margin_indiv2.push(self.var_limit[i].0);
+                }
+                   
+            }
+            pop[k*self.var_num..k*self.var_num+self.var_num].clone_from_slice(&mut margin_indiv);
+            pop[(k+1)*self.var_num..(k+1)*self.var_num+self.var_num].clone_from_slice(&mut margin_indiv2);
+            
+            k+=2;
+        }
+        
+    }
     pub fn get_aei(&self)->f64{
         let mut obj_sum_0:Vec<f64>=self.objs.deref().iter().enumerate().filter(|&(i,_)|i%2==0).map(|(_,&x)|x).collect();
         obj_sum_0.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
