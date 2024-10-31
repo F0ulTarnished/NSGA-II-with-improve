@@ -17,6 +17,8 @@ fn main() {
                                         601, 
                                         2, 
                                         var_limit_inside);
+//******** wether to better initialize pop,if not ,add // 
+    species.add_margin_indiv();
 //*****   ---
 //*****    --|
 //*****   ---, choose whether load a population or not
@@ -34,7 +36,8 @@ fn main() {
 //*****   |  |
 //*****    --|
 //*****      |, choose the problem
-    species.update_obj(one_minmax);
+    let pf =one_minmax;
+    species.update_obj(pf);
     
 //*****   ---
 //*****   (-)
@@ -47,7 +50,7 @@ fn main() {
     let mode=MODE::Mei;
 
     
-    let mei=utils::nsga_ii_c::nsga_ii_c_fn(&mut species,one_minmax,&mode,&op,&model);
+    let mei=utils::nsga_ii_c::nsga_ii_c_fn(&mut species,pf,&mode,&op,&model);
     //println!("{:?}",species.get_aei());
     
     if mode==MODE::Mei{
